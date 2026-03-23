@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Packs de prompts premium para ChatGPT, Claude y Gemini. En español rioplatense. Para freelancers, emprendedores y agencias argentinas.">
+<title>PromptARG — Prompts que trabajan por vos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0c0c0a;--ink2:#1a1a16;--ink3:#252520;
+  --green:#b8f03a;--green-d:#9dd432;
+  --cream:#f2ede4;--cream2:#c8c4bc;--muted:#6a6a62;
+  --border:rgba(242,237,228,.08);--border2:rgba(242,237,228,.14);
+  --gold:#f0b83a;--r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--cream);font-family:'Inter',system-ui,sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.display{font-family:'Bebas Neue',sans-serif;line-height:.92;letter-spacing:-.01em}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--green);font-weight:500;display:flex;align-items:center;gap:.75rem}
+.eyebrow::after{content:'';flex:1;height:1px;background:var(--border2);max-width:60px}
+.container{width:100%;max-width:1140px;margin:0 auto;padding:0 5vw}
+section{padding:6rem 0}
+
+/* NAV */
+.nav-wrap{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .3s}
+.nav-wrap.scrolled{background:rgba(12,12,10,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 5vw;max-width:1140px;margin:0 auto}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.08em}
+.logo span{color:var(--green)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-badge{background:rgba(184,240,58,.12);border:1px solid rgba(184,240,58,.25);color:var(--green);font-size:.68rem;font-weight:500;padding:.3rem .9rem;border-radius:100px;letter-spacing:.06em;text-transform:uppercase}
+.nav-badge::before{content:'● ';animation:blink 1.6s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.nav-cta{background:var(--green);color:var(--ink);font-weight:600;font-size:.82rem;padding:.55rem 1.4rem;border-radius:100px;transition:background .2s,transform .2s;border:none;display:inline-block}
+.nav-cta:hover{background:var(--green-d);transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:8rem 5vw 4rem;position:relative;overflow:hidden}
+.glow{position:absolute;border-radius:50%;pointer-events:none}
+.glow-1{top:-10%;right:-5%;width:min(700px,90vw);height:min(700px,90vw);background:radial-gradient(circle,rgba(184,240,58,.09) 0%,transparent 65%)}
+.glow-2{bottom:-15%;left:-10%;width:min(500px,70vw);height:min(500px,70vw);background:radial-gradient(circle,rgba(184,240,58,.04) 0%,transparent 65%)}
+.hero-inner{max-width:900px;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--border2);border-radius:100px;padding:.35rem 1rem;font-size:.78rem;color:var(--cream2);margin-bottom:2rem;background:rgba(255,255,255,.03)}
+.hero-tag span{color:var(--green);font-weight:500}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.8rem,11vw,8.5rem);line-height:.9;letter-spacing:-.01em;margin-bottom:1.8rem}
+.hero h1 em{font-style:normal;color:var(--green)}
+.hero-sub{font-size:clamp(1rem,1.8vw,1.2rem);color:var(--cream2);line-height:1.75;max-width:580px;margin-bottom:2.5rem;font-weight:300}
+.hero-sub strong{color:var(--cream);font-weight:500}
+.cta-row{display:flex;gap:.875rem;flex-wrap:wrap;align-items:center;margin-bottom:4rem}
+.btn-primary{background:var(--green);color:var(--ink);font-weight:600;font-size:1rem;padding:1rem 2.2rem;border-radius:var(--r);border:none;display:inline-flex;align-items:center;gap:.5rem;transition:background .2s,transform .2s,box-shadow .2s}
+.btn-primary:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 16px 40px rgba(184,240,58,.25)}
+.btn-outline{background:transparent;color:var(--cream);font-weight:400;font-size:1rem;padding:1rem 2rem;border-radius:var(--r);border:1px solid var(--border2);display:inline-flex;align-items:center;gap:.5rem;transition:border-color .2s,color .2s}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,auto);gap:2.5rem;padding:2rem 0;border-top:1px solid var(--border);width:fit-content}
+.stat-item{display:flex;flex-direction:column;gap:.2rem}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--green);line-height:1}
+.stat-label{font-size:.75rem;color:var(--muted);letter-spacing:.04em}
+
+/* TICKER */
+.ticker{background:var(--green);color:var(--ink);padding:.7rem 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-block;animation:ticker 22s linear infinite;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.18em}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* PROOF BAR */
+.proof-bar{padding:2.5rem 0;border-bottom:1px solid var(--border)}
+.proof-inner{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.proof-pill{display:flex;align-items:center;gap:.5rem;padding:.5rem 1.1rem;border:1px solid var(--border2);border-radius:100px;font-size:.8rem;color:var(--cream2);background:rgba(255,255,255,.02)}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem;position:relative}
+.how-step{padding:2rem 1.75rem;background:var(--ink2);border:1px solid var(--border);border-radius:var(--r);transition:border-color .25s,transform .25s}
+.how-step:hover{border-color:rgba(184,240,58,.3);transform:translateY(-4px)}
+.step-badge{width:36px;height:36px;border-radius:50%;background:var(--green);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.how-step h3{font-size:1rem;font-weight:600;margin-bottom:.6rem;color:var(--cream)}
+.how-step p{font-size:.875rem;color:var(--cream2);line-height:1.65}
+
+/* WHY */
+.why-section{background:var(--ink2)}
+.why-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.why-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6vw,4.5rem);line-height:.95;margin-bottom:1.5rem}
+.why-headline em{font-style:normal;color:var(--green)}
+.why-body{font-size:.95rem;color:var(--cream2);line-height:1.8;margin-bottom:2rem}
+.why-list{display:flex;flex-direction:column;gap:1.25rem}
+.why-item{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.5rem;background:var(--ink3);border:1px solid var(--border);border-radius:var(--r);transition:border-color .2s}
+.why-item:hover{border-color:rgba(184,240,58,.25)}
+.why-icon{font-size:1.3rem;flex-shrink:0;width:40px;height:40px;background:rgba(184,240,58,.1);border-radius:var(--r);display:flex;align-items:center;justify-content:center}
+.why-item h4{font-size:.9rem;font-weight:600;margin-bottom:.3rem;color:var(--cream)}
+.why-item p{font-size:.83rem;color:var(--cream2);line-height:1.6}
+
+/* PACKS */
+.packs-section{background:var(--ink)}
+.packs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;align-items:start}
+.pack-card{background:var(--ink2);border:1px solid var(--border);border-radius:var(--r);padding:2rem;position:relative;transition:transform .3s,border-color .3s,box-shadow .3s;display:flex;flex-direction:column}
+.pack-card:hover{transform:translateY(-6px);border-color:rgba(184,240,58,.2);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.pack-card.featured{border-color:var(--green);background:linear-gradient(145deg,var(--ink2) 0%,rgba(184,240,58,.05) 100%);box-shadow:0 0 0 1px var(--green),0 24px 60px rgba(184,240,58,.1)}
+.pack-card.premium{border-color:rgba(240,184,58,.3)}
+.pack-card.premium:hover{border-color:var(--gold);box-shadow:0 24px 60px rgba(240,184,58,.1)}
+.pack-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--green);color:var(--ink);font-size:.65rem;font-weight:600;padding:.28rem .9rem;border-radius:0 0 var(--r) var(--r);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.pack-badge.gold{background:var(--gold)}
+.pack-header{padding-bottom:1.5rem;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+.pack-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.pack-name{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.04em;color:var(--cream);margin-bottom:.4rem}
+.pack-tagline{font-size:.85rem;color:var(--cream2);line-height:1.55}
+.pack-price{margin-bottom:1.5rem}
+.price-row{display:flex;align-items:baseline;gap:.35rem;margin-bottom:.25rem}
+.price-cur{font-size:.9rem;color:var(--muted)}
+.price-amt{font-family:'Bebas Neue',sans-serif;font-size:3.2rem;color:var(--cream);line-height:1}
+.price-period{font-size:.78rem;color:var(--muted)}
+.pack-features{list-style:none;margin-bottom:2rem;flex:1}
+.pack-features li{font-size:.83rem;color:var(--cream2);padding:.45rem 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:.6rem;line-height:1.4}
+.pack-features li::before{content:'✓';color:var(--green);font-weight:600;flex-shrink:0;font-size:.8rem;margin-top:.05rem}
+.pack-features li.prem::before{content:'★';color:var(--gold)}
+.pack-cta{display:block;width:100%;padding:.9rem 1.5rem;border-radius:var(--r);font-weight:600;font-size:.9rem;text-align:center;transition:all .2s;border:1.5px solid var(--border2);color:var(--cream);background:transparent;letter-spacing:.03em}
+.pack-cta:hover{background:var(--ink3);border-color:var(--cream2)}
+.pack-card.featured .pack-cta{background:var(--green);border-color:var(--green);color:var(--ink)}
+.pack-card.featured .pack-cta:hover{background:var(--green-d);border-color:var(--green-d)}
+.pack-card.premium .pack-cta{border-color:rgba(240,184,58,.4);color:var(--gold)}
+.pack-card.premium .pack-cta:hover{background:rgba(240,184,58,.08);border-color:var(--gold)}
+
+/* TESTIMONIALS */
+.testi-section{background:var(--ink2)}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.25rem;margin-top:3rem}
+.testi-card{background:var(--ink3);border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;transition:border-color .2s}
+.testi-card:hover{border-color:rgba(184,240,58,.2)}
+.testi-stars{color:var(--green);font-size:.9rem;margin-bottom:1rem;letter-spacing:.1em}
+.testi-text{font-size:.88rem;color:var(--cream2);line-height:1.7;margin-bottom:1.25rem;font-style:italic;position:relative;padding-left:.25rem}
+.testi-author{display:flex;align-items:center;gap:.75rem}
+.testi-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--green) 0%,var(--ink3) 100%);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--ink);flex-shrink:0}
+.testi-name{font-size:.85rem;font-weight:600;color:var(--cream)}
+.testi-role{font-size:.75rem;color:var(--muted)}
+
+/* COMPARE */
+.compare-section{background:var(--ink)}
+.compare-wrap{margin-top:3rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;min-width:560px}
+thead th{padding:1rem 1.5rem;text-align:center;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;background:var(--ink2);border:1px solid var(--border);color:var(--cream2)}
+thead th:first-child{text-align:left;color:var(--muted);font-weight:400}
+thead th.th-feat{background:var(--green);color:var(--ink)}
+tbody tr:hover td{background:rgba(255,255,255,.02)}
+tbody td{padding:.875rem 1.5rem;font-size:.84rem;border:1px solid var(--border);color:var(--cream2);text-align:center;vertical-align:middle}
+tbody td:first-child{text-align:left;color:var(--cream);font-weight:400}
+.td-y{color:var(--green);font-weight:700;font-size:1rem}
+.td-n{color:var(--muted)}
+.td-f{background:rgba(184,240,58,.03)}
+tfoot td{padding:.75rem 1.5rem;border:1px solid var(--border);background:var(--ink2);text-align:center}
+tfoot td:first-child{background:transparent;border-color:transparent}
+
+/* FAQ */
+.faq-section{background:var(--ink2)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:3rem;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.faq-item{border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
+.faq-item:nth-child(2n){border-right:none}
+.faq-q{width:100%;background:none;border:none;color:var(--cream);font-size:.9rem;font-weight:400;text-align:left;padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:color .2s,background .2s;line-height:1.4}
+.faq-q:hover{color:var(--green);background:rgba(184,240,58,.03)}
+.faq-icon{flex-shrink:0;width:22px;height:22px;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:background .2s,border-color .2s,transform .3s;color:var(--cream2)}
+.faq-item.open .faq-icon{background:var(--green);border-color:var(--green);color:var(--ink);transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;font-size:.84rem;color:var(--cream2);line-height:1.7;padding:0 1.5rem}
+.faq-item.open .faq-a{max-height:300px;padding:0 1.5rem 1.25rem}
+
+/* GUARANTEE */
+.guarantee-section{background:linear-gradient(135deg,var(--ink2) 0%,var(--ink3) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 0}
+.guarantee-inner{display:flex;align-items:center;gap:3rem;flex-wrap:wrap;justify-content:center;text-align:center}
+.guarantee-badge{width:100px;height:100px;border-radius:50%;border:2px solid var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:600}
+.guarantee-badge strong{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;line-height:1;display:block;margin-bottom:.15rem}
+.guarantee-text{max-width:500px}
+.guarantee-text h3{font-size:1.4rem;font-weight:600;margin-bottom:.75rem;color:var(--cream)}
+.guarantee-text p{font-size:.88rem;color:var(--cream2);line-height:1.7}
+
+/* FINAL CTA */
+.final-cta{background:var(--green);color:var(--ink);padding:7rem 5vw;text-align:center;position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.15) 0%,transparent 60%);pointer-events:none}
+.final-cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,7.5rem);line-height:.9;margin-bottom:1.25rem;position:relative}
+.final-cta p{font-size:clamp(.95rem,1.6vw,1.15rem);max-width:480px;margin:0 auto 2.5rem;opacity:.7;line-height:1.7;font-weight:300;position:relative}
+.final-cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+.btn-dark{background:var(--ink);color:var(--green);font-weight:600;font-size:1rem;padding:1.1rem 2.5rem;border-radius:var(--r);border:none;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-dark:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.btn-wa{background:#25d366;color:#fff;font-weight:600;font-size:1rem;padding:1.1rem 2.5rem;border-radius:var(--r);border:none;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.3)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:3rem 5vw;border-top:1px solid var(--border)}
+.footer-inner{max-width:1140px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+.footer-links{display:flex;gap:2rem;list-style:none;flex-wrap:wrap}
+.footer-links a{color:var(--muted);font-size:.83rem;transition:color .2s}
+.footer-links a:hover{color:var(--green)}
+.footer-copy{font-size:.73rem;color:rgba(106,106,98,.6)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(12,12,10,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--ink2);border:1px solid rgba(184,240,58,.25);border-radius:10px;padding:2.5rem;max-width:440px;width:100%;position:relative;transform:translateY(24px);transition:transform .35s cubic-bezier(.16,1,.3,1);max-height:90vh;overflow-y:auto}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-close{position:absolute;top:1.25rem;right:1.25rem;background:var(--ink3);border:1px solid var(--border);color:var(--cream2);font-size:1rem;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;cursor:pointer}
+.modal-close:hover{background:var(--ink);color:var(--green)}
+.modal-pack-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;margin-bottom:.35rem}
+.modal-price{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--green);margin-bottom:.75rem}
+.modal-desc{font-size:.85rem;color:var(--cream2);line-height:1.6;margin-bottom:1.75rem}
+.modal-steps{list-style:none;margin-bottom:1.75rem}
+.modal-steps li{display:flex;gap:.875rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--border);font-size:.83rem;color:var(--cream2);line-height:1.4}
+.modal-steps li:last-child{border-bottom:none}
+.step-num{background:var(--green);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:1rem;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.05rem}
+.modal-wa{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;background:#25d366;color:#fff;font-weight:700;font-size:.95rem;padding:1rem 1.5rem;border:none;border-radius:var(--r);transition:background .2s,transform .2s;text-decoration:none;margin-bottom:.75rem;cursor:pointer}
+.modal-wa:hover{background:#20ba58;transform:translateY(-1px)}
+.modal-note{font-size:.72rem;color:var(--muted);text-align:center;line-height:1.5}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:900px){.packs-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}}
+@media(max-width:768px){.why-layout{grid-template-columns:1fr;gap:2.5rem}.faq-grid{grid-template-columns:1fr}.faq-item{border-right:none}.how-grid{grid-template-columns:1fr}}
+@media(max-width:600px){
+  section{padding:4rem 0}
+  .hero{padding:7rem 5vw 3rem}
+  .hero-stats{grid-template-columns:repeat(2,auto);gap:1.5rem}
+  .cta-row{flex-direction:column;align-items:flex-start}
+  .btn-primary,.btn-outline{width:100%;justify-content:center}
+  .guarantee-inner{flex-direction:column;gap:1.5rem}
+  .final-cta{padding:5rem 5vw}
+  .final-cta-btns{flex-direction:column;align-items:center}
+  .btn-dark,.btn-wa{width:100%;justify-content:center}
+  .footer-inner{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .nav-right .nav-cta{display:none}
+}
+@media(max-width:380px){.hero h1{font-size:3.2rem}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap" id="navbar">
+  <nav>
+    <div class="logo">Prompt<span>ARG</span></div>
+    <div class="nav-right">
+      <div class="nav-badge">Disponible ahora</div>
+      <a href="https://www.instagram.com/promptarg_?igsh=ejlidmpwbTV3cDRl" target="_blank" class="nav-cta" style="background:transparent;border:1px solid rgba(184,240,58,.35);color:var(--green)">📸 Instagram</a>
+      <a href="javascript:void(0)" class="nav-cta" onclick="smoothTo('packs');return false">Ver packs →</a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <span>✦ Nuevo</span>
+      Packs de prompts premium · Entrega instantánea
+    </div>
+    <h1>La IA<br>que <em>labura</em><br>por vos</h1>
+    <p class="hero-sub">
+      Prompts reescritos por expertos para <strong>ChatGPT, Claude y Gemini</strong>.
+      En español rioplatense. Listos para copiar, pegar y obtener resultados
+      profesionales desde el primer intento.
+    </p>
+    <div class="cta-row">
+      <a href="javascript:void(0)" class="btn-primary" onclick="smoothTo('packs');return false">Ver los packs →</a>
+      <a href="javascript:void(0)" class="btn-outline" onclick="smoothTo('como-funciona');return false">¿Cómo funciona?</a>
+      <a href="https://www.instagram.com/promptarg_?igsh=ejlidmpwbTV3cDRl" target="_blank" class="btn-outline" style="gap:.4rem">📸 <span>@promptarg_</span></a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num">+200</span><span class="stat-label">Prompts incluidos</span></div>
+      <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">IAs compatibles</span></div>
+      <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Horas de espera</span></div>
+      <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">Usos del pack</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    ✦ ENTREGA INSTANTÁNEA &nbsp;&nbsp;&nbsp; ✦ CHATGPT · CLAUDE · GEMINI &nbsp;&nbsp;&nbsp; ✦ PAGO POR MERCADOPAGO &nbsp;&nbsp;&nbsp; ✦ ESPAÑOL RIOPLATENSE &nbsp;&nbsp;&nbsp; ✦ USO ILIMITADO &nbsp;&nbsp;&nbsp; ✦ REESCRITOS POR EXPERTOS &nbsp;&nbsp;&nbsp; ✦ GARANTÍA 48 HS &nbsp;&nbsp;&nbsp; ✦ ENTREGA INSTANTÁNEA &nbsp;&nbsp;&nbsp; ✦ CHATGPT · CLAUDE · GEMINI &nbsp;&nbsp;&nbsp; ✦ PAGO POR MERCADOPAGO &nbsp;&nbsp;&nbsp; ✦ ESPAÑOL RIOPLATENSE &nbsp;&nbsp;&nbsp; ✦ USO ILIMITADO &nbsp;&nbsp;&nbsp; ✦ REESCRITOS POR EXPERTOS &nbsp;&nbsp;&nbsp; ✦ GARANTÍA 48 HS &nbsp;&nbsp;&nbsp;
+  </div>
+</div>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="container">
+    <div class="proof-inner">
+      <div class="proof-pill"><span>🤖</span> Compatible con ChatGPT 4o</div>
+      <div class="proof-pill"><span>🤖</span> Compatible con Claude 3.5</div>
+      <div class="proof-pill"><span>🤖</span> Compatible con Gemini Pro</div>
+      <div class="proof-pill"><span>🇦🇷</span> Hecho en Argentina</div>
+      <div class="proof-pill"><span>📥</span> PDF al instante</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="como-funciona">
+  <div class="container">
+    <p class="eyebrow fade-up">Así de simple</p>
+    <h2 class="display fade-up" style="font-size:clamp(2.8rem,6vw,4.5rem);margin:1rem 0 1rem">Empezás a usarlo<br>en 4 pasos</h2>
+    <p class="fade-up" style="color:var(--cream2);max-width:520px;margin-bottom:0;font-size:.95rem;line-height:1.7">Sin configuraciones raras ni cursos previos. Si sabés usar WhatsApp, sabés usar esto.</p>
+    <div class="how-grid">
+      <div class="how-step fade-up">
+        <div class="step-badge">1</div>
+        <h3>Elegís tu pack</h3>
+        <p>Seleccionás el pack según lo que necesitás — Starter, Negocio o Pro Total.</p>
+      </div>
+      <div class="how-step fade-up">
+        <div class="step-badge">2</div>
+        <h3>Pagás y recibís</h3>
+        <p>Pagás por MercadoPago o transferencia. En menos de 5 minutos tenés el PDF por WhatsApp.</p>
+      </div>
+      <div class="how-step fade-up">
+        <div class="step-badge">3</div>
+        <h3>Copiás y pegás</h3>
+        <p>Abrís el PDF, copiás el prompt que necesitás y lo pegás en la IA. Completás los [corchetes].</p>
+      </div>
+      <div class="how-step fade-up">
+        <div class="step-badge">4</div>
+        <h3>Obtenés resultados</h3>
+        <p>La IA genera un output de nivel profesional. Podés pedirle ajustes: "más corto", "tono informal"…</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section">
+  <div class="container">
+    <div class="why-layout">
+      <div class="fade-up">
+        <p class="eyebrow">Por qué PromptARG</p>
+        <h2 class="why-headline" style="margin:1rem 0 1.25rem">
+          Escribiste mal<br>los prompts<br><em>toda tu vida</em>
+        </h2>
+        <p class="why-body">
+          La mayoría le pide a la IA lo mismo que le preguntaría a Google: frases cortas sin contexto.
+          El resultado son respuestas genéricas y decepcionantes.<br><br>
+          Nuestros prompts están estructurados con rol, contexto, objetivo y formato de salida.
+          La diferencia en el resultado es inmediata y visible.
+        </p>
+        <a href="javascript:void(0)" class="btn-primary" style="width:fit-content" onclick="smoothTo('packs');return false">
+          Quiero los prompts →
+        </a>
+      </div>
+      <div class="why-list">
+        <div class="why-item fade-up">
+          <div class="why-icon">🎯</div>
+          <div>
+            <h4>Resultados profesionales desde el primer intento</h4>
+            <p>Cada prompt está diseñado y testeado para darte outputs de calidad sin prueba y error. Copy, ventas, estrategia — todo en el pack.</p>
+          </div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-icon">🇦🇷</div>
+          <div>
+            <h4>En castellano rioplatense, para Argentina</h4>
+            <p>Nada de traducciones raras ni prompts pensados para el mercado yankee. Nuestras palabras, nuestros negocios.</p>
+          </div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-icon">⚡</div>
+          <div>
+            <h4>Descarga instantánea, uso ilimitado</h4>
+            <p>Pagás y en minutos tenés el PDF. Sin esperas. Una vez que es tuyo, es tuyo para siempre.</p>
+          </div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-icon">🔄</div>
+          <div>
+            <h4>Compatible con cualquier IA</h4>
+            <p>ChatGPT, Claude, Gemini, Copilot — los prompts funcionan con todas. No te atamos a ninguna plataforma.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKS -->
+<section class="packs-section" id="packs">
+  <div class="container">
+    <p class="eyebrow fade-up">Elegí tu pack</p>
+    <h2 class="display fade-up" style="font-size:clamp(2.8rem,6vw,4.5rem);margin:1rem 0 .75rem">
+      Tres packs,<br>un solo objetivo
+    </h2>
+    <p class="fade-up" style="color:var(--cream2);max-width:480px;margin-bottom:0;font-size:.92rem;line-height:1.7">
+      Desde los primeros pasos con la IA hasta el pack definitivo para agencias y consultores.
+    </p>
+    <div class="packs-grid">
+
+      <!-- STARTER -->
+      <div class="pack-card fade-up">
+        <div class="pack-header">
+          <span class="pack-icon">⚡</span>
+          <div class="pack-name">Pack Starter</div>
+          <p class="pack-tagline">Para empezar a usar la IA bien desde el día uno. Los 30 prompts más útiles para cualquier persona.</p>
+        </div>
+        <div class="pack-price">
+          <div class="price-row"><span class="price-cur">$</span><span class="price-amt">3.500</span></div>
+          <p class="price-period">ARS · pago único · tuyo para siempre</p>
+        </div>
+        <ul class="pack-features">
+          <li>30 prompts esenciales listos para usar</li>
+          <li>6 categorías: redes, textos, emails, productividad, negocio y vida cotidiana</li>
+          <li>Cada prompt con rol, contexto y formato de salida</li>
+          <li>Ejemplos de uso en prompts clave</li>
+          <li>Guía de uso paso a paso incluida</li>
+          <li>PDF descargable — se ve perfecto en móvil y PC</li>
+        </ul>
+        <a href="https://wa.me/542945554920?text=Hola!%20Quiero%20comprar%20el%20Pack%20Starter%20(%243.500%20ARS)%20%F0%9F%9A%80" target="_blank" class="pack-cta">
+          Comprar por WhatsApp →
+        </a>
+      </div>
+
+      <!-- NEGOCIO (FEATURED) -->
+      <div class="pack-card featured fade-up">
+        <div class="pack-badge">⭐ Más vendido</div>
+        <div class="pack-header">
+          <span class="pack-icon">🚀</span>
+          <div class="pack-name">Pack Negocio</div>
+          <p class="pack-tagline">Para freelancers, emprendedores y equipos. Todo lo que necesitás para hacer crecer tu negocio con IA.</p>
+        </div>
+        <div class="pack-price">
+          <div class="price-row"><span class="price-cur">$</span><span class="price-amt">8.900</span></div>
+          <p class="price-period">ARS · pago único · tuyo para siempre</p>
+        </div>
+        <ul class="pack-features">
+          <li>80 prompts premium para negocios</li>
+          <li>8 categorías especializadas</li>
+          <li>Ventas, cierre y manejo de objeciones</li>
+          <li>Marketing, contenido y campañas</li>
+          <li>Clientes, onboarding y retención</li>
+          <li>Gestión, finanzas y operaciones</li>
+          <li>Redes sociales avanzado y copywriting</li>
+          <li>Productividad y herramientas de IA</li>
+        </ul>
+        <a href="https://wa.me/542945554920?text=Hola!%20Quiero%20comprar%20el%20Pack%20Negocio%20(%248.900%20ARS)%20%F0%9F%9A%80" target="_blank" class="pack-cta">
+          Comprar por WhatsApp →
+        </a>
+      </div>
+
+      <!-- PRO TOTAL -->
+      <div class="pack-card premium fade-up">
+        <div class="pack-badge gold">👑 Pro Total</div>
+        <div class="pack-header">
+          <span class="pack-icon">💎</span>
+          <div class="pack-name">Pack Pro Total</div>
+          <p class="pack-tagline">El pack definitivo para agencias, consultores y los que van en serio. Más de 200 prompts para cada situación.</p>
+        </div>
+        <div class="pack-price">
+          <div class="price-row"><span class="price-cur">$</span><span class="price-amt">18.500</span></div>
+          <p class="price-period">ARS · pago único · tuyo para siempre</p>
+        </div>
+        <ul class="pack-features">
+          <li class="prem">Todo el Starter + Negocio incluidos</li>
+          <li class="prem">E-commerce y tienda online</li>
+          <li class="prem">Recursos Humanos y gestión de equipos</li>
+          <li class="prem">Educación y cursos online</li>
+          <li class="prem">Imágenes con IA (Midjourney, DALL-E 3)</li>
+          <li class="prem">Cadenas de prompts para proyectos completos</li>
+          <li class="prem">Prompts por profesión (abogados, coaches, diseñadores…)</li>
+          <li class="prem">Soporte por WhatsApp durante 30 días</li>
+        </ul>
+        <a href="https://wa.me/542945554920?text=Hola!%20Quiero%20comprar%20el%20Pack%20Pro%20Total%20(%2418.500%20ARS)%20%F0%9F%91%91" target="_blank" class="pack-cta">
+          Comprar por WhatsApp →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="container">
+    <p class="eyebrow fade-up">Lo que dicen</p>
+    <h2 class="display fade-up" style="font-size:clamp(2.5rem,5vw,4rem);margin:1rem 0 0">
+      Resultados reales,<br>gente real
+    </h2>
+    <div class="testi-grid">
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Empecé a usar el Pack Negocio para escribir propuestas y lo que antes me llevaba 2 horas ahora lo hago en 20 minutos. El ROI fue inmediato.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div><div class="testi-name">Martín G.</div><div class="testi-role">Consultor de marketing · Buenos Aires</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Tenía miedo de que fueran prompts genéricos como los que encontrás en internet. Nada que ver. Están armados de verdad, con contexto y todo. El de ventas es una joya.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">S</div>
+          <div><div class="testi-name">Sol V.</div><div class="testi-role">Diseñadora freelance · Rosario</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Lo del español rioplatense marca la diferencia. El contenido que genera tiene mi voz, no la de una traducción del inglés. Mis seguidores notaron el cambio.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">C</div>
+          <div><div class="testi-name">Caro M.</div><div class="testi-role">Creadora de contenido · Córdoba</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Compré el Pro Total para mi agencia y se lo recomendé a todo el equipo. Las cadenas de prompts para lanzamientos son exactamente lo que necesitábamos.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">F</div>
+          <div><div class="testi-name">Federico L.</div><div class="testi-role">Director de agencia digital · Mendoza</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Nunca había entendido bien cómo usar la IA para mi negocio. Con estos prompts le empecé a sacar jugo desde el primer día. Muy bien explicado todo.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">L</div>
+          <div><div class="testi-name">Laura R.</div><div class="testi-role">Emprendedora · Mar del Plata</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Los prompts de e-commerce del Pro Total me ayudaron a reescribir todas las fichas de mi tienda. Las conversiones mejoraron desde la primera semana.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div><div class="testi-name">Agus P.</div><div class="testi-role">Tienda online · CABA</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="compare-section" id="comparar">
+  <div class="container">
+    <p class="eyebrow fade-up">Comparativa</p>
+    <h2 class="display fade-up" style="font-size:clamp(2.5rem,5vw,4rem);margin:1rem 0 .5rem">¿Cuál es el tuyo?</h2>
+    <p class="fade-up" style="color:var(--cream2);font-size:.9rem;margin-bottom:0">Elegí según dónde estás parado hoy.</p>
+    <div class="compare-wrap fade-up">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:36%">Qué incluye</th>
+            <th>Starter<br><span style="font-family:inherit;font-size:.73rem;font-weight:400;color:var(--cream2)">$3.500 ARS</span></th>
+            <th class="th-feat">Negocio<br><span style="font-family:inherit;font-size:.73rem;font-weight:600;color:var(--ink)">$8.900 ARS</span></th>
+            <th>Pro Total<br><span style="font-family:inherit;font-size:.73rem;font-weight:400;color:var(--gold)">$18.500 ARS</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Prompts esenciales (30)</td><td class="td-y">✓</td><td class="td-y td-f">✓</td><td class="td-y">✓</td></tr>
+          <tr><td>Prompts de negocio (80)</td><td class="td-n">—</td><td class="td-y td-f">✓</td><td class="td-y">✓</td></tr>
+          <tr><td>E-commerce y tienda online</td><td class="td-n">—</td><td class="td-n td-f">—</td><td class="td-y">✓</td></tr>
+          <tr><td>Recursos Humanos</td><td class="td-n">—</td><td class="td-n td-f">—</td><td class="td-y">✓</td></tr>
+          <tr><td>Educación y cursos online</td><td class="td-n">—</td><td class="td-n td-f">—</td><td class="td-y">✓</td></tr>
+          <tr><td>Imágenes con IA (Midjourney, DALL-E)</td><td class="td-n">—</td><td class="td-n td-f">—</td><td class="td-y">✓</td></tr>
+          <tr><td>Cadenas de prompts completas</td><td class="td-n">—</td><td class="td-n td-f">—</td><td class="td-y">✓</td></tr>
+          <tr><td>Prompts por profesión</td><td class="td-n">—</td><td class="td-n td-f">—</td><td class="td-y">✓</td></tr>
+          <tr><td>Soporte por WhatsApp</td><td class="td-n">—</td><td class="td-n td-f">—</td><td class="td-y">30 días</td></tr>
+          <tr><td>Ejemplos de uso</td><td>Seleccionados</td><td class="td-f">Todos</td><td>Todos</td></tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td><a href="https://wa.me/542945554920?text=Hola!%20Quiero%20comprar%20el%20Pack%20Starter%20(%243.500%20ARS)%20%F0%9F%9A%80" target="_blank" style="color:var(--cream2);font-size:.78rem;text-decoration:underline">Comprar →</a></td>
+            <td style="background:rgba(184,240,58,.07)"><a href="https://wa.me/542945554920?text=Hola!%20Quiero%20comprar%20el%20Pack%20Negocio%20(%248.900%20ARS)%20%F0%9F%9A%80" target="_blank" style="color:var(--green);font-size:.78rem;text-decoration:underline;font-weight:600">Comprar →</a></td>
+            <td><a href="https://wa.me/542945554920?text=Hola!%20Quiero%20comprar%20el%20Pack%20Pro%20Total%20(%2418.500%20ARS)%20%F0%9F%91%91" target="_blank" style="color:var(--gold);font-size:.78rem;text-decoration:underline">Comprar →</a></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<div class="guarantee-section">
+  <div class="container">
+    <div class="guarantee-inner fade-up">
+      <div class="guarantee-badge"><strong>100%</strong>Satisfacción</div>
+      <div class="guarantee-text">
+        <h3>Si no quedás conforme, te devolvemos la plata</h3>
+        <p>Estamos tan seguros de la calidad de los packs que te ofrecemos garantía de satisfacción. Si dentro de las 48 horas sentís que no fue lo que esperabas, escribinos y te hacemos el reembolso completo, sin preguntas.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <p class="eyebrow fade-up">Preguntas frecuentes</p>
+    <h2 class="display fade-up" style="font-size:clamp(2.5rem,5vw,4rem);margin:1rem 0 0">Todo lo que<br>querés saber</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Necesito saber de tecnología o IA?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Para nada. Si sabés escribir en WhatsApp, sabés usar la IA. Copiás el prompt, lo pegás en ChatGPT o la IA que uses, completás los corchetes con tu información y listo. Los packs incluyen una guía de uso paso a paso.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Cómo recibo el pack después de pagar?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Te escribís por WhatsApp con el botón de compra, acordamos el pago por MercadoPago o transferencia, y al confirmar el pago te enviamos el PDF al instante por el mismo chat. Tarda menos de 5 minutos en total.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Cuántas veces puedo usar los prompts?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Ilimitadas. Una vez que comprás el pack, es tuyo para siempre. Podés usarlo todas las veces que quieras, en todas las IAs que quieras, para todos los proyectos que tengas.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Funciona con la versión gratuita de ChatGPT?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí. Todos los prompts están optimizados para funcionar con ChatGPT gratuito (GPT-3.5 y GPT-4o mini). Si tenés la versión paga o usás Claude, los resultados son todavía mejores.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo comprar más de un pack?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí, y si comprás más de uno en el mismo momento te hacemos un descuento combinado. Escribinos por WhatsApp y coordinamos. El Pro Total ya incluye el contenido de los otros dos packs.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Hacen factura?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí. Pedí tu factura escribiéndonos después de la compra con tus datos fiscales. La emitimos dentro de las 48 horas hábiles.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Se actualizan los packs?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí, hacemos actualizaciones periódicas. Los compradores del Pack Pro Total reciben las actualizaciones gratis. Los otros packs pueden recibir la actualización a un precio especial para clientes.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Tienen garantía de devolución?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí. Si dentro de las 48 horas de la compra sentís que el pack no fue lo que esperabas, te devolvemos el dinero completo sin preguntas. Solo escribinos por WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Empezá hoy.<br>No mañana.</h2>
+  <p>Miles de personas ya usan la IA para trabajar menos y ganar más. ¿Vos cuándo arrancás?</p>
+  <div class="final-cta-btns">
+    <a href="javascript:void(0)" class="btn-dark" onclick="smoothTo('packs');return false">Ver los packs →</a>
+    <a href="https://wa.me/542945554920?text=Hola!%20Quiero%20info%20sobre%20los%20packs%20de%20PromptARG%20%F0%9F%9A%80" target="_blank" class="btn-wa">💬 Consultar por WhatsApp</a>
+    <a href="https://www.instagram.com/promptarg_?igsh=ejlidmpwbTV3cDRl" target="_blank" class="btn-outline" style="border-color:rgba(255,255,255,.2);color:var(--cream)">📸 Seguinos en Instagram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="logo" style="font-size:1.4rem">Prompt<span>ARG</span></div>
+    <ul class="footer-links">
+      <li><a href="https://www.instagram.com/promptarg_?igsh=ejlidmpwbTV3cDRl" target="_blank">Instagram</a></li>
+      <li><a href="https://wa.me/542945554920" target="_blank">WhatsApp</a></li>
+      <li><a href="https://wa.me/542945554920" target="_blank">Contacto</a></li>
+      <li><a href="javascript:void(0)" onclick="smoothTo('packs');return false">Ver packs</a></li>
+    </ul>
+    <span class="footer-copy">© 2025 PromptARG · Hecho con 🧉 en Argentina</span>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">✕</button>
+    <div class="modal-pack-name" id="modal-title">Pack Negocio</div>
+    <div class="modal-price" id="modal-price">$8.900 ARS</div>
+    <p class="modal-desc">Escribinos por WhatsApp y te explicamos cómo pagar. Te respondemos en minutos y el PDF llega al instante.</p>
+    <ul class="modal-steps">
+      <li><span class="step-num">1</span><span>Hacé clic en el botón de WhatsApp abajo</span></li>
+      <li><span class="step-num">2</span><span>Pagás por MercadoPago o transferencia bancaria</span></li>
+      <li><span class="step-num">3</span><span>Recibís el PDF al instante en el mismo chat</span></li>
+    </ul>
+    <a id="modal-wa-btn" href="https://wa.me/542945554920" target="_blank" class="modal-wa">💬 Comprar por WhatsApp</a>
+    <p class="modal-note">🔒 Respondemos en minutos · Entrega instantánea · Garantía de satisfacción 48 hs</p>
+  </div>
+</div>
+
+<script>
+function smoothTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>60)navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+},{passive:true});
+
+function toggleFaq(btn){
+  const item=btn.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+function openModal(pack,price,msg){
+  document.getElementById('modal-title').textContent='Pack '+pack;
+  document.getElementById('modal-price').textContent=price+' ARS';
+  document.getElementById('modal-wa-btn').href='https://wa.me/542945554920?text='+encodeURIComponent(msg);
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach((entry,i)=>{
+    if(entry.isIntersecting){
+      setTimeout(()=>entry.target.classList.add('visible'),i*60);
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
